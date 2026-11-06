@@ -22,7 +22,7 @@ export default function BookingWizard() {
 
   const service = services.find((s) => s.id === form.serviceId)
   const barber = team.find((b) => b.id === form.barberId)
-  const { slots, loading } = useSlotsFor(form.date)
+  const { slots, loading, error: slotsError } = useSlotsFor(form.date)
   const free = useFreeSlots({ dateISO: form.date, barberId: form.barberId, durationMinutes: service?.durationMinutes, slots })
 
   // „Запази“ от картата на услуга: избира услугата и прескача на стъпка 1.
@@ -228,6 +228,11 @@ export default function BookingWizard() {
               <p className="rounded-sm border border-dashed border-line p-6 text-center text-sm text-muted">Първо избери ден от календара.</p>
             ) : loading ? (
               <p className="rounded-sm border border-dashed border-line p-6 text-center text-sm text-muted">Зареждане…</p>
+            ) : slotsError ? (
+              <p role="alert" className="rounded-sm border border-red-500/40 bg-red-500/10 p-6 text-center text-sm text-red-200">
+                Не можем да заредим свободните часове. Обади ни се на {site.phone}.
+                {import.meta.env.DEV && <span className="mt-2 block text-xs opacity-70">{String(slotsError.code || slotsError.message)}</span>}
+              </p>
             ) : free.length === 0 ? (
               <p className="rounded-sm border border-dashed border-line p-6 text-center text-sm text-muted">
                 Няма свободни часове на {formatDateBG(form.date)}. Опитай друг ден{form.barberId !== 'any' ? ' или друг бръснар' : ''}.

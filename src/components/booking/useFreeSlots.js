@@ -6,18 +6,17 @@ import { freeStarts, getDaySchedule, minStartFor } from '../../lib/time'
 
 // Абонира се за заетите блокове на дадена дата.
 export function useSlotsFor(dateISO) {
-  const [slots, setSlots] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [state, setState] = useState({ slots: [], loading: true, error: null })
   useEffect(() => {
     if (!dateISO) return undefined
-    setLoading(true)
-    const unsub = store.subscribeSlots(dateISO, (s) => {
-      setSlots(s)
-      setLoading(false)
-    })
+    const unsub = store.subscribeSlots(
+      dateISO,
+      (slots) => setState({ slots, loading: false, error: null }),
+      (err) => setState({ slots: [], loading: false, error: err }),
+    )
     return unsub
   }, [dateISO])
-  return { slots, loading }
+  return state
 }
 
 /**

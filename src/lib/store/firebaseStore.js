@@ -44,16 +44,23 @@ const slotIds = (b) =>
     startMin: m,
   }))
 
-export function subscribeSlots(dateISO, cb) {
+export function subscribeSlots(dateISO, cb, onError) {
   const q = query(collection(db, 'slots'), where('date', '==', dateISO))
-  return onSnapshot(q, (snap) => {
-    cb(
-      snap.docs.map((d) => {
-        const s = d.data()
-        return { id: d.id, barberId: s.barberId, date: s.date, startMin: toMin(s.start), bookingId: s.bookingId }
-      }),
-    )
-  })
+  return onSnapshot(
+    q,
+    (snap) => {
+      cb(
+        snap.docs.map((d) => {
+          const s = d.data()
+          return { id: d.id, barberId: s.barberId, date: s.date, startMin: toMin(s.start), bookingId: s.bookingId }
+        }),
+      )
+    },
+    (err) => {
+      console.error('Firestore slots error:', err)
+      onError?.(err)
+    },
+  )
 }
 
 export async function createBooking(data) {
