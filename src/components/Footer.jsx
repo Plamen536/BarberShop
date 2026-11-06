@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { site } from '../data/site'
 import { navLinks } from '../data/nav'
 import Icon from './Icons'
@@ -61,9 +62,14 @@ export default function Footer() {
           <p>
             © {year} {site.name}. Всички права запазени.
           </p>
-          <a href="#top" className="inline-flex items-center gap-1.5 transition-colors hover:text-gold">
-            Нагоре <Icon name="arrowUp" className="h-4 w-4" />
-          </a>
+          <div className="flex items-center gap-5">
+            <Link to="/admin" className="transition-colors hover:text-gold">
+              Админ
+            </Link>
+            <a href="#top" className="inline-flex items-center gap-1.5 transition-colors hover:text-gold">
+              Нагоре <Icon name="arrowUp" className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

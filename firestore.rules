@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      // Всеки акаунт, създаден от теб в Firebase Console -> Authentication,
+      // е администратор. В сайта няма регистрация.
+      return request.auth != null;
+    }
+
+    function validBooking(d) {
+      return d.keys().hasAll(['barberId', 'serviceId', 'date', 'start', 'end', 'name', 'phone', 'status', 'createdAt'])
+        && d.barberId is string && d.barberId.size() <= 40
+        && d.serviceId is string && d.serviceId.size() <= 40
+        && d.date is string && d.date.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}')
+        && d.start is string && d.start.matches('[0-9]{2}:[0-9]{2}')
+        && d.end is string && d.end.matches('[0-9]{2}:[0-9]{2}')
+        && d.name is string && d.name.size() >= 2 && d.name.size() <= 80
+        && d.phone is string && d.phone.size() >= 6 && d.phone.size() <= 25
+        && (!('note' in d) || (d.note is string && d.note.size() <= 500));
+    }
+
+    // Пълни резервации с лични данни – само админът може да чете.
+    match /bookings/{id} {
+      allow create: if validBooking(request.resource.data);
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Заети блокове – публични, без лични данни. Само create (не update):
+    // така два клиента не могат да запишат един и същ блок.
+    match /slots/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['barberId', 'date', 'start', 'bookingId'])
+        && id == request.resource.data.barberId + '_' + request.resource.data.date + '_'
+                 + request.resource.data.start.replace(':', '');
+      allow delete: if isAdmin();
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { currency, services } from '../data/services'
+import { formatDuration } from '../lib/time'
 import Icon from './Icons'
 import SectionTitle from './SectionTitle'
 
@@ -31,7 +32,7 @@ export default function Services() {
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{s.description}</p>
               <div className="mt-6 flex items-end justify-between border-t border-line pt-5">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted">{s.duration}</p>
+                  <p className="text-xs uppercase tracking-[0.15em] text-muted">{formatDuration(s.durationMinutes)}</p>
                   <p className="font-display text-3xl font-semibold text-gold">
                     {s.price} <span className="text-base text-cream/70">{currency}</span>
                   </p>

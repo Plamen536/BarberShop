@@ -1,5 +1,6 @@
 // ======================================================================
 //  УСЛУГИ И ЦЕНИ  (примерни – смени ги със своите)
+//  durationMinutes се ползва за изчисляване на свободните часове.
 //  icon: scissors | razor | beard | combo | kid
 // ======================================================================
 
@@ -8,7 +9,7 @@ export const services = [
     id: 'haircut',
     name: 'Мъжко подстригване',
     description: 'Консултация, подстригване с машинка и ножица, измиване и стайлинг.',
-    duration: '45 мин',
+    durationMinutes: 45,
     price: 30,
     icon: 'scissors',
   },
@@ -16,7 +17,7 @@ export const services = [
     id: 'shave',
     name: 'Класическо бръснене',
     description: 'Топла кърпа, пяна с четка и бръснене с бръснач. Завършва със студена кърпа и балсам.',
-    duration: '30 мин',
+    durationMinutes: 30,
     price: 25,
     icon: 'razor',
   },
@@ -24,7 +25,7 @@ export const services = [
     id: 'beard',
     name: 'Оформяне на брада',
     description: 'Оформяне с машинка и бръснач, контуриране и грижа с масло за брада.',
-    duration: '30 мин',
+    durationMinutes: 30,
     price: 20,
     icon: 'beard',
   },
@@ -32,7 +33,7 @@ export const services = [
     id: 'combo',
     name: 'Комбо: коса + брада',
     description: 'Пълният пакет – подстригване и оформяне на брада на преференциална цена.',
-    duration: '75 мин',
+    durationMinutes: 75,
     price: 45,
     icon: 'combo',
     featured: true,
@@ -41,7 +42,7 @@ export const services = [
     id: 'kids',
     name: 'Детско подстригване',
     description: 'За малките господа до 12 години. Търпение, внимание и приятелска атмосфера.',
-    duration: '30 мин',
+    durationMinutes: 30,
     price: 20,
     icon: 'kid',
   },

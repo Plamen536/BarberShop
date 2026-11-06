@@ -82,6 +82,26 @@ const paths = {
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   arrowDown: <path d="M12 5v14m0 0-6-6m6 6 6-6" />,
   arrowUp: <path d="M12 19V5m0 0-6 6m6-6 6 6" />,
+  chevronLeft: <path d="m15 6-6 6 6 6" />,
+  chevronRight: <path d="m9 6 6 6-6 6" />,
+  trash: (
+    <>
+      <path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" />
+    </>
+  ),
+  logout: <path d="M10 17l5-5-5-5M15 12H3M13 3h6v18h-6" />,
+  lock: (
+    <>
+      <rect x="5" y="11" width="14" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </>
+  ),
+  calendar: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4M16 3v4" />
+    </>
+  ),
   quote: <path d="M7 17h3l2-4V7H6v6h3l-2 4Zm8 0h3l2-4V7h-6v6h3l-2 4Z" />,
 }
 
