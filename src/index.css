@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0c0c0c;
+  --color-coal: #151515;
+  --color-slate: #1f1f1f;
+  --color-line: #2c2c2c;
+  --color-gold: #c9a24d;
+  --color-gold-light: #e6ca7c;
+  --color-gold-dark: #9c7a2f;
+  --color-cream: #f4efe4;
+  --color-muted: #aaa397;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-ink text-cream font-body antialiased;
+  }
+  ::selection {
+    @apply bg-gold text-ink;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .section {
+    @apply py-20 sm:py-24;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition-all duration-300;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition-all duration-300 bg-gold text-ink hover:bg-gold-light hover:shadow-[0_0_30px_-5px_var(--color-gold)] active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition-all duration-300 border border-gold/60 text-gold hover:border-gold hover:bg-gold/10;
+  }
+  .card {
+    @apply rounded-md border border-line bg-coal transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_20px_40px_-20px_rgba(201,162,77,0.35)];
+  }
+  .field {
+    @apply w-full rounded-sm border border-line bg-slate px-4 py-3 text-cream placeholder:text-muted/70 transition-colors duration-200 focus:border-gold focus:outline-none;
+  }
+  .label {
+    @apply mb-2 block text-xs font-semibold uppercase tracking-[0.15em] text-muted;
+  }
+  .reveal {
+    @apply translate-y-6 opacity-0 transition-all duration-700 ease-out;
+  }
+  .reveal.is-visible {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(1) saturate(3) hue-rotate(5deg);
+  cursor: pointer;
+}
