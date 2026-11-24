@@ -33,9 +33,11 @@ export default function Services() {
               <div className="mt-6 flex items-end justify-between border-t border-line pt-5">
                 <div>
                   <p className="text-xs uppercase tracking-[0.15em] text-muted">{formatDuration(s.durationMinutes)}</p>
-                  <p className="font-display text-3xl font-semibold text-gold">
-                    {s.price} <span className="text-base text-cream/70">{currency}</span>
-                  </p>
+                  {s.price != null && (
+                    <p className="font-display text-3xl font-semibold text-gold">
+                      {s.price} <span className="text-base text-cream/70">{currency}</span>
+                    </p>
+                  )}
                 </div>
                 <a
                   href={`#booking?service=${s.id}`}

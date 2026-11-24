@@ -4,13 +4,15 @@
 //  icon: scissors | razor | beard | combo | kid
 // ======================================================================
 
-export const services = [
+import { salon } from './salon'
+
+const baseServices = [
   {
     id: 'haircut',
     name: 'Мъжко подстригване',
     description: 'Консултация, подстригване с машинка и ножица, измиване и стайлинг.',
     durationMinutes: 45,
-    price: 30,
+    price: 15,
     icon: 'scissors',
   },
   {
@@ -18,7 +20,7 @@ export const services = [
     name: 'Класическо бръснене',
     description: 'Топла кърпа, пяна с четка и бръснене с бръснач. Завършва със студена кърпа и балсам.',
     durationMinutes: 30,
-    price: 25,
+    price: 13,
     icon: 'razor',
   },
   {
@@ -26,7 +28,7 @@ export const services = [
     name: 'Оформяне на брада',
     description: 'Оформяне с машинка и бръснач, контуриране и грижа с масло за брада.',
     durationMinutes: 30,
-    price: 20,
+    price: 10,
     icon: 'beard',
   },
   {
@@ -34,7 +36,7 @@ export const services = [
     name: 'Комбо: коса + брада',
     description: 'Пълният пакет – подстригване и оформяне на брада на преференциална цена.',
     durationMinutes: 75,
-    price: 45,
+    price: 23,
     icon: 'combo',
     featured: true,
   },
@@ -43,9 +45,10 @@ export const services = [
     name: 'Детско подстригване',
     description: 'За малките господа до 12 години. Търпение, внимание и приятелска атмосфера.',
     durationMinutes: 30,
-    price: 20,
+    price: 10,
     icon: 'kid',
   },
 ]
 
-export const currency = 'лв.'
+export const services = salon?.services ?? baseServices
+export const currency = salon?.currency ?? '€'

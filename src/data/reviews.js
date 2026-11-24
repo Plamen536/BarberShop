@@ -2,7 +2,9 @@
 //  ОТЗИВИ  (примерни)
 // ======================================================================
 
-export const reviews = [
+import { salon } from './salon'
+
+const baseReviews = [
   {
     name: 'Иван К.',
     rating: 5,
@@ -22,3 +24,5 @@ export const reviews = [
     date: 'Август 2026',
   },
 ]
+
+export const reviews = salon?.reviews ?? baseReviews

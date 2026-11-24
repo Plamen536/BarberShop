@@ -204,9 +204,11 @@ export default function BookingWizard() {
                     <span className="block text-xs text-muted">{formatDuration(s.durationMinutes)}</span>
                   </span>
                 </span>
-                <span className="font-display text-xl font-semibold text-gold">
-                  {s.price} <span className="text-sm text-cream/70">{currency}</span>
-                </span>
+                {s.price != null && (
+                  <span className="font-display text-xl font-semibold text-gold">
+                    {s.price} <span className="text-sm text-cream/70">{currency}</span>
+                  </span>
+                )}
               </label>
             ))}
           </div>

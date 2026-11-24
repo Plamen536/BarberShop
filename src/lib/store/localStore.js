@@ -3,9 +3,11 @@
 // употреба. Виж README за настройка на Firebase.
 
 import { blocksBetween, blockId, toMin } from '../time'
+import { salonId } from '../../data/salon'
 import { site } from '../../data/site'
 
-const KEY = 'barbershop.bookings'
+// Всеки демо салон (?salon=…) има отделни резервации.
+const KEY = salonId ? `barbershop.bookings.${salonId}` : 'barbershop.bookings'
 const AUTH_KEY = 'barbershop.admin'
 const DEMO_PASSWORD = import.meta.env.VITE_ADMIN_DEMO_PASSWORD || 'admin'
 
@@ -19,7 +21,7 @@ const readAll = () => {
   } catch {
     return []
   }
-}
+} 
 const writeAll = (arr) => {
   localStorage.setItem(KEY, JSON.stringify(arr))
   emit()

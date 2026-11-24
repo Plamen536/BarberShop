@@ -3,7 +3,9 @@
 //  Смени стойностите тук – компонентите ги четат автоматично.
 // ======================================================================
 
-export const site = {
+import { salon } from './salon'
+
+const baseSite = {
   // TODO: име на бръснарницата
   name: 'Gentleman Barber',
   tagline: 'Класически стил. Модерна прецизност.',
@@ -60,13 +62,24 @@ export const site = {
   mapEmbedUrl: '',
 }
 
-export const aboutText = [
+// В демо салон (?salon=…) данните на примерния салон не се наследяват
+// за имейл, социални мрежи и карта – иначе биха сочили към чужд бизнес.
+export const site = salon
+  ? { ...baseSite, email: '', socials: [], mapEmbedUrl: '', ...salon.site }
+  : baseSite
+
+const baseAboutText = [
   'Отворихме врати с една идея – да върнем ритуала на класическата бръснарница в модерен вид. Място, където мъжът идва не просто за подстригване, а за момент за себе си.',
   'Работим с премиум продукти, топли кърпи и остри бръсначи. Всеки от екипа ни е преминал обучение в класически и съвременни техники, а резултатът е стил, който ти отива.',
 ]
 
-export const stats = [
+const baseStats = [
   { value: '10+', label: 'години опит' },
   { value: '5000+', label: 'доволни клиенти' },
   { value: '4.9', label: 'рейтинг в Google' },
 ]
+
+export const aboutText = salon?.aboutText ?? baseAboutText
+// Примерните числа са измислени – в демо салон се показват само
+// истински, зададени в data/salons.js.
+export const stats = salon ? (salon.stats ?? []) : baseStats

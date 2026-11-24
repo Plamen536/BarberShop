@@ -10,6 +10,11 @@
 //   subscribeBookings(date, cb, err)  админ: пълни резервации
 //   cancelBooking(booking)            админ
 
-const hasFirebase = Boolean(import.meta.env.VITE_FIREBASE_API_KEY && import.meta.env.VITE_FIREBASE_PROJECT_ID)
+import { salonId } from '../../data/salon'
+
+// Демо салоните (?salon=…) винаги са в демо режим, за да не пишат
+// пробни резервации в истинската база.
+const hasFirebase =
+  !salonId && Boolean(import.meta.env.VITE_FIREBASE_API_KEY && import.meta.env.VITE_FIREBASE_PROJECT_ID)
 
 export const store = hasFirebase ? await import('./firebaseStore') : await import('./localStore')

@@ -7,7 +7,9 @@
 //  daysOff   – (по желание) дати 'ГГГГ-ММ-ДД', в които бръснарят почива
 // ======================================================================
 
-export const team = [
+import { salon } from './salon'
+
+const baseTeam = [
   {
     id: 'georgi',
     name: 'Георги Иванов',
@@ -49,3 +51,15 @@ export const team = [
     instagram: 'https://instagram.com/',
   },
 ]
+
+// Демо салон без собствен екип ползва примерния, но без личното му
+// работно време и отпуски – иначе биха противоречали на часовете на салона.
+const members =
+  salon?.team ?? (salon ? baseTeam.map(({ schedule: _schedule, daysOff: _daysOff, ...m }) => m) : baseTeam)
+
+// В демо салон снимката и daysOff са по желание.
+export const team = members.map((m, i) => ({
+  daysOff: [],
+  image: `images/team-${i + 1}.jpg`,
+  ...m,
+}))
