@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { navLinks } from '../data/nav'
+import { salon } from '../data/salon'
 import { site } from '../data/site'
 import Icon from './Icons'
 
@@ -29,7 +30,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 z-50 transition-all duration-300 ${salon ? 'top-7' : 'top-0'} ${
         scrolled || open ? 'border-b border-line bg-ink/90 backdrop-blur-md' : 'bg-transparent'
       }`}
     >

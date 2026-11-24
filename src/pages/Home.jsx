@@ -1,6 +1,7 @@
 import About from '../components/About'
 import Booking from '../components/Booking'
 import Contact from '../components/Contact'
+import DemoBanner from '../components/DemoBanner'
 import Footer from '../components/Footer'
 import Gallery from '../components/Gallery'
 import Header from '../components/Header'
@@ -21,6 +22,7 @@ export default function Home() {
       >
         Към съдържанието
       </a>
+      <DemoBanner />
       <Header />
       <main id="main">
         <Hero />
